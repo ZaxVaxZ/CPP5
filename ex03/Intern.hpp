@@ -1,5 +1,5 @@
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
+#ifndef INTERN_HPP
+#define INTERN_HPP
 
 #include <iostream>
 #include <exception>
@@ -9,17 +9,17 @@ typedef std::string str;
 
 class Form;
 
-class Bureaucrat
+class Intern
 {
 	private:
 		const str	_name;
 		int			_grade;
 
 	public:
-		Bureaucrat();
-		Bureaucrat(str name, int grade);
-		Bureaucrat(const Bureaucrat &copy);
-		~Bureaucrat();
+		Intern();
+		Intern(str name, int grade);
+		Intern(const Intern &copy);
+		~Intern();
 
 		int		getGrade() const;
 		str		getName () const;
@@ -27,7 +27,7 @@ class Bureaucrat
 		void	demote  ();
 		void	signForm(Form &form) const;
 
-		Bureaucrat &operator =(const Bureaucrat &copy);
+		Intern &operator =(const Intern &copy);
 
 		class GradeTooHighException: public std::exception
 		{
@@ -42,6 +42,6 @@ class Bureaucrat
 		};
 };
 
-std::ostream	&operator <<(std::ostream &o, const Bureaucrat &a);
+std::ostream	&operator <<(std::ostream &o, const Intern &a);
 
 #endif

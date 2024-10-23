@@ -1,11 +1,11 @@
-#include "Bureaucrat.hpp"
+#include "Intern.hpp"
 
-Bureaucrat::Bureaucrat(): _name("Unnamed"), _grade(150)
+Intern::Intern(): _name("Unnamed"), _grade(150)
 {
 	
 }
 
-Bureaucrat::Bureaucrat(str name, int grade): _name(name), _grade(grade)
+Intern::Intern(str name, int grade): _name(name), _grade(grade)
 {
 	if (grade < 1)
 		throw GradeTooHighException();
@@ -13,36 +13,36 @@ Bureaucrat::Bureaucrat(str name, int grade): _name(name), _grade(grade)
 		throw GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy): _name(copy.getName()), _grade(copy.getGrade())
+Intern::Intern(const Intern &copy): _name(copy.getName()), _grade(copy.getGrade())
 {
 	
 }
 
-str Bureaucrat::getName() const
+str Intern::getName() const
 {
 	return _name;
 }
 
-int Bureaucrat::getGrade() const
+int Intern::getGrade() const
 {
 	return _grade;
 }
 
-void Bureaucrat::promote()
+void Intern::promote()
 {
 	if (_grade == 1)
 		throw GradeTooHighException();
 	_grade--;
 }
 
-void Bureaucrat::demote()
+void Intern::demote()
 {
 	if (_grade == 150)
 		throw GradeTooLowException();
 	_grade++;
 }
 
-void Bureaucrat::signForm(Form &form) const
+void Intern::signForm(Form &form) const
 {
 	if (form.getSigned())
 	{
@@ -60,29 +60,29 @@ void Bureaucrat::signForm(Form &form) const
 	}
 }
 
-std::ostream &operator<<(std::ostream &o, const Bureaucrat &b)
+std::ostream &operator<<(std::ostream &o, const Intern &b)
 {
-	o << b.getName() << " is a Bureaucrat of grade " << b.getGrade();
+	o << b.getName() << " is a Intern of grade " << b.getGrade();
 	return o;
 }
 
-Bureaucrat &Bureaucrat::operator =(const Bureaucrat &copy)
+Intern &Intern::operator =(const Intern &copy)
 {
 	_grade = copy.getGrade();
 	return *this;
 }
 
-Bureaucrat::~Bureaucrat()
+Intern::~Intern()
 {
 	
 }
 
-const char *Bureaucrat::GradeTooHighException::what() const throw()
+const char *Intern::GradeTooHighException::what() const throw()
 {
 	return "Grade too high";
 }
 
-const char *Bureaucrat::GradeTooLowException::what() const throw()
+const char *Intern::GradeTooLowException::what() const throw()
 {
 	return "Grade too low";
 }

@@ -1,5 +1,5 @@
-#ifndef FORM_HPP
-#define FORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+#define ROBOTOMYREQUESTFORM_HPP
 
 #include <iostream>
 #include <exception>
@@ -9,7 +9,7 @@ typedef std::string str;
 
 class Bureaucrat;
 
-class Form
+class RobotomyRequestForm
 {
 	private:
 		const str	_name;
@@ -18,10 +18,10 @@ class Form
 		bool		_signed;
 
 	public:
-		Form();
-		Form(const str &name, int sign_grade, int exec_grade);
-		Form(const Form &copy);
-		~Form();
+		RobotomyRequestForm();
+		RobotomyRequestForm(const str &name, int sign_grade, int exec_grade);
+		RobotomyRequestForm(const RobotomyRequestForm &copy);
+		~RobotomyRequestForm();
 
 		str		getName			 () const;
 		int		getSigningGrade  () const;
@@ -30,7 +30,7 @@ class Form
 		void	beSigned(const Bureaucrat &signer);
 		void	beExecuted(const Bureaucrat &executor);
 
-		Form &operator =(const Form &copy);
+		RobotomyRequestForm &operator =(const RobotomyRequestForm &copy);
 
 		class GradeTooHighException: public std::exception
 		{
@@ -45,6 +45,6 @@ class Form
 		};
 };
 
-std::ostream	&operator <<(std::ostream &o, const Form &a);
+std::ostream	&operator <<(std::ostream &o, const RobotomyRequestForm &a);
 
 #endif
