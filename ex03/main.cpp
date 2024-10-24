@@ -14,6 +14,8 @@ int main()
 	Form immi("immigration", 64, 3);
 	Form fcpy(immi);
 
+
+
 	std::cout << smth << "\n";
 	std::cout << immi << "\n";
 	std::cout << fcpy << "\n";
