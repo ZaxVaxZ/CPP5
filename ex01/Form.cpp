@@ -28,7 +28,7 @@ str Form::getName() const
 
 std::ostream &operator<<(std::ostream &o, const Form &f)
 {
-	o << f.getName() << " form has a signing grade of ";
+	o << f.getName() << " has a signing grade of ";
 	o << f.getSigningGrade() << " or higher, and an execution grade of ";
 	o << f.getExecutionGrade() << " or higher";
 	return o;

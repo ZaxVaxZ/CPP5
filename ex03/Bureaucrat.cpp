@@ -46,17 +46,17 @@ void Bureaucrat::signForm(Form &form) const
 {
 	if (form.getSigned())
 	{
-		std::cout << _name << " bureaucrat couldn't sign " << form.getName() << " form as it has already been signed\n";
+		std::cout << _name << " bureaucrat couldn't sign " << form.getName() << " as it has already been signed\n";
 		return ;
 	}
 	try
 	{
 		form.beSigned(*this);
-		std::cout << _name << " signed the " << form.getName() << " form\n";
+		std::cout << _name << " signed the " << form.getName() << "\n";
 	}
 	catch (std::exception &e)
 	{
-		std::cout << _name << " couldn't sign the " << form.getName() << " form because his " << e.what() << "\n";
+		std::cout << _name << " couldn't sign the " << form.getName() << " because his " << e.what() << "\n";
 	}
 }
 

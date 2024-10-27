@@ -2,17 +2,17 @@
 
 RobotomyRequestForm::RobotomyRequestForm(): Form("Robotomy Request Form", 72, 45), _target("somewhere")
 {
-	
+	srand(time(NULL));
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const str &target): Form("Robotomy Request Form", 72, 45), _target(target)
 {
-
+	srand(time(NULL));
 }
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &copy): Form("Robotomy Request Form", 72, 45), _target(copy.getTarget())
 {
-	
+	srand(time(NULL));
 }
 
 str RobotomyRequestForm::getTarget() const

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <exception>
 #include <cmath>
+#include <ctime>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
