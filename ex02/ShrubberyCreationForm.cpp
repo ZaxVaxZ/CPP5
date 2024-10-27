@@ -1,84 +1,81 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(): _name("Unnamed"),
-	_sign_grade(150), _exec_grade(150), _signed(false)
+ShrubberyCreationForm::ShrubberyCreationForm(): AForm("Shrubbery Creation Form", 145, 137), _target("somewhere")
 {
 	
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const str &name, int sign_grade, int exec_grade): _name(name),
-	_sign_grade(sign_grade), _exec_grade(exec_grade), _signed(false)
+ShrubberyCreationForm::ShrubberyCreationForm(const str &target): AForm("Shrubbery Creation Form", 145, 137), _target(target)
 {
-	if (sign_grade < 1 || exec_grade < 1)
-		throw GradeTooHighException();
-	if (sign_grade > 150 || exec_grade > 150)
+
+}
+
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy): AForm("Shrubbery Creation Form", 145, 137), _target(copy.getTarget())
+{
+	
+}
+
+str ShrubberyCreationForm::getTarget() const
+{
+	return _target;
+}
+
+void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+{
+	std::ofstream	wrf;
+
+	if (!getSigned())
+	{
+		std::cout << getName() << " must be signed to be executed!\n";
+		return ;
+	}
+	if (executor.getGrade() > getExecutionGrade())
 		throw GradeTooLowException();
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &copy): _name(copy.getName()),
-	_sign_grade(copy.getSigningGrade()), _exec_grade(copy.getExecutionGrade()), _signed(false)
-{
-	
-}
-
-str ShrubberyCreationForm::getName() const
-{
-	return _name;
-}
-
-std::ostream &operator<<(std::ostream &o, const ShrubberyCreationForm &f)
-{
-	o << f.getName() << " form has a signing grade of ";
-	o << f.getSigningGrade() << " or higher, and an execution grade of ";
-	o << f.getExecutionGrade() << " or higher";
-	return o;
+	wrf.open(_target + "_shrubbery", std::ios_base::app);
+	if (!wrf)
+	{
+		std::cerr << "Error: File couldn't be created or appended to.\n";
+		return ;
+	}
+    wrf << "                                                     .\n";
+    wrf << "                                          .         ;\n";
+    wrf << "             .              .              ;%     ;;\n";
+    wrf << "               ,           ,                :;%  %;\n";
+    wrf << "                :         ;                   :;%;'     .,\n";
+    wrf << "       ,.        %;     %;            ;        %;'    ,;\n";
+    wrf << "         ;       ;%;  %%;        ,     %;    ;%;    ,%'\n";
+    wrf << "          %;       %;%;      ,  ;       %;  ;%;   ,%;' \n";
+    wrf << "           ;%;      %;        ;%;        % ;%;  ,%;'\n";
+    wrf << "            `%;.     ;%;     %;'         `;%%;.%;'\n";
+    wrf << "             `:;%.    ;%%. %@;        %; ;@%;%'\n";
+    wrf << "                `:%;.  :;bd%;          %;@%;'\n";
+    wrf << "                  `@%:.  :;%.         ;@@%;'\n";
+    wrf << "                    `@%.  `;@%.      ;@@%;\n";
+    wrf << "                      `@%%. `@%%    ;@@%;\n";
+    wrf << "                        ;@%. :@%%  %@@%;\n";
+    wrf << "                          %@bd%%%bd%%:;\n";
+    wrf << "                            #@%%%%%:;;\n";
+    wrf << "                            %@@%%%::;\n";
+    wrf << "                            %@@@%(o);  . '\n";
+    wrf << "                            %@@@o%;:(.,'\n";
+    wrf << "                        `.. %@@@o%::;\n";
+    wrf << "                           `)@@@o%::;\n";
+    wrf << "                            %@@(o)::;\n";
+    wrf << "                           .%@@@@%::;\n";
+    wrf << "        \\  /               ;%@@@@%::;.\n";
+    wrf << "        \\()               ;%@@@@%%:;;;.\n";
+    wrf << "         ||           ...;%@@@@@%%:;;;;,..\n";
+	wrf.close();
+	std::cout << "Shrubbery created at " << _target << "\n";
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator =(const ShrubberyCreationForm &copy)
 {
-	(void) copy;
+	_target = copy.getTarget();
 	return *this;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 	
-}
-
-int ShrubberyCreationForm::getExecutionGrade() const
-{
-	return _exec_grade;
-}
-
-int ShrubberyCreationForm::getSigningGrade() const
-{
-	return _sign_grade;
-}
-
-bool ShrubberyCreationForm::getSigned() const
-{
-	return _signed;
-}
-
-void ShrubberyCreationForm::beSigned(const Bureaucrat &signer)
-{
-	if (_signed)
-	{
-		std::cout << "ShrubberyCreationForm already signed!\n";
-		return ;
-	}
-	if (signer.getGrade() > _sign_grade)
-		throw GradeTooLowException();
-	_signed = true;
-	std::cout << "ShrubberyCreationForm signed!\n";
-}
-
-const char *ShrubberyCreationForm::GradeTooHighException::what() const throw()
-{
-	return "Grade too high";
-}
-
-const char *ShrubberyCreationForm::GradeTooLowException::what() const throw()
-{
-	return "Grade too low";
 }

@@ -21,14 +21,15 @@ class AForm
 		AForm();
 		AForm(const str &name, int sign_grade, int exec_grade);
 		AForm(const AForm &copy);
-		~AForm();
+		virtual ~AForm();
 
 		str		getName			 () const;
 		int		getSigningGrade  () const;
 		int		getExecutionGrade() const;
 		bool	getSigned		 () const;
 		void	beSigned(const Bureaucrat &signer);
-		void	beExecuted(const Bureaucrat &executor);
+
+		virtual void	execute(const Bureaucrat &executor) const = 0;
 
 		AForm &operator =(const AForm &copy);
 

@@ -26,6 +26,7 @@ class Bureaucrat
 		void	promote ();
 		void	demote  ();
 		void	signForm(Form &form) const;
+		void	executeForm(Form const &form) const;
 
 		Bureaucrat &operator =(const Bureaucrat &copy);
 

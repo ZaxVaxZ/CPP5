@@ -28,7 +28,7 @@ str AForm::getName() const
 
 std::ostream &operator<<(std::ostream &o, const AForm &f)
 {
-	o << f.getName() << " form has a signing grade of ";
+	o << f.getName() << " has a signing grade of ";
 	o << f.getSigningGrade() << " or higher, and an execution grade of ";
 	o << f.getExecutionGrade() << " or higher";
 	return o;
@@ -64,21 +64,21 @@ void AForm::beSigned(const Bureaucrat &signer)
 {
 	if (_signed)
 	{
-		std::cout << "AForm already signed!\n";
+		std::cout << "Form already signed!\n";
 		return ;
 	}
 	if (signer.getGrade() > _sign_grade)
 		throw GradeTooLowException();
 	_signed = true;
-	std::cout << "AForm signed!\n";
+	std::cout << "Form signed!\n";
 }
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-	return "Grade too high";
+	return "grade is too high";
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-	return "Grade too low";
+	return "grade is too low";
 }

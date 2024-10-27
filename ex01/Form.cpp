@@ -75,10 +75,10 @@ void Form::beSigned(const Bureaucrat &signer)
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return "Grade too high";
+	return "grade is too high";
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return "Grade too low";
+	return "grade is too low";
 }

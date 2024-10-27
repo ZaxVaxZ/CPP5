@@ -3,11 +3,11 @@
 
 #include <iostream>
 #include <exception>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 typedef std::string str;
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -25,7 +25,8 @@ class Bureaucrat
 		str		getName () const;
 		void	promote ();
 		void	demote  ();
-		void	signForm(Form &form) const;
+		void	signForm(AForm &form) const;
+		void	executeForm(AForm const &form) const;
 
 		Bureaucrat &operator =(const Bureaucrat &copy);
 

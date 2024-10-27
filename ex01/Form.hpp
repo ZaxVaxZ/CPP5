@@ -28,7 +28,6 @@ class Form
 		int		getExecutionGrade() const;
 		bool	getSigned		 () const;
 		void	beSigned(const Bureaucrat &signer);
-		void	beExecuted(const Bureaucrat &executor);
 
 		Form &operator =(const Form &copy);
 

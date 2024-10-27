@@ -64,6 +64,14 @@ int main()
 	{
 		std::cout << e.what() << "\n";
 	}
+	try
+	{
+		ej.signForm(immi);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << "\n";
+	}
 	
 	immi.beSigned(pi);
 

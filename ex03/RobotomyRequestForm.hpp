@@ -3,48 +3,29 @@
 
 #include <iostream>
 #include <exception>
+#include <cmath>
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 typedef std::string str;
 
 class Bureaucrat;
 
-class RobotomyRequestForm
+class RobotomyRequestForm: public Form
 {
 	private:
-		const str	_name;
-		const int	_sign_grade;
-		const int	_exec_grade;
-		bool		_signed;
+		str	_target;
 
 	public:
 		RobotomyRequestForm();
-		RobotomyRequestForm(const str &name, int sign_grade, int exec_grade);
+		RobotomyRequestForm(const str &target);
 		RobotomyRequestForm(const RobotomyRequestForm &copy);
 		~RobotomyRequestForm();
 
-		str		getName			 () const;
-		int		getSigningGrade  () const;
-		int		getExecutionGrade() const;
-		bool	getSigned		 () const;
-		void	beSigned(const Bureaucrat &signer);
-		void	beExecuted(const Bureaucrat &executor);
-
+		str		getTarget()							  const;
+		void	execute  (const Bureaucrat &executor) const;
+		
 		RobotomyRequestForm &operator =(const RobotomyRequestForm &copy);
-
-		class GradeTooHighException: public std::exception
-		{
-			public:
-				const char	*what() const throw();
-		};
-		class GradeTooLowException: public std::exception
-		{
-			public:
-				const char	*what() const throw();
-
-		};
 };
-
-std::ostream	&operator <<(std::ostream &o, const RobotomyRequestForm &a);
 
 #endif

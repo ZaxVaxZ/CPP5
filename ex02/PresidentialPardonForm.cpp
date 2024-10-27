@@ -1,84 +1,44 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(): _name("Unnamed"),
-	_sign_grade(150), _exec_grade(150), _signed(false)
+PresidentialPardonForm::PresidentialPardonForm(): AForm("Presidential Pardon Form", 25, 5), _target("somewhere")
 {
 	
 }
 
-PresidentialPardonForm::PresidentialPardonForm(const str &name, int sign_grade, int exec_grade): _name(name),
-	_sign_grade(sign_grade), _exec_grade(exec_grade), _signed(false)
+PresidentialPardonForm::PresidentialPardonForm(const str &target): AForm("Presidential Pardon Form", 25, 5), _target(target)
 {
-	if (sign_grade < 1 || exec_grade < 1)
-		throw GradeTooHighException();
-	if (sign_grade > 150 || exec_grade > 150)
+
+}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy): AForm("Presidential Pardon Form", 25, 5), _target(copy.getTarget())
+{
+	
+}
+
+str PresidentialPardonForm::getTarget() const
+{
+	return _target;
+}
+
+void PresidentialPardonForm::execute(const Bureaucrat &executor) const
+{
+	if (!getSigned())
+	{
+		std::cout << getName() << " must be signed to be executed!\n";
+		return ;
+	}
+	if (executor.getGrade() > getExecutionGrade())
 		throw GradeTooLowException();
-}
-
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &copy): _name(copy.getName()),
-	_sign_grade(copy.getSigningGrade()), _exec_grade(copy.getExecutionGrade()), _signed(false)
-{
-	
-}
-
-str PresidentialPardonForm::getName() const
-{
-	return _name;
-}
-
-std::ostream &operator<<(std::ostream &o, const PresidentialPardonForm &f)
-{
-	o << f.getName() << " form has a signing grade of ";
-	o << f.getSigningGrade() << " or higher, and an execution grade of ";
-	o << f.getExecutionGrade() << " or higher";
-	return o;
+	std::cout << _target << " has been pardoned by Zaphod Beeblebrox\n";
 }
 
 PresidentialPardonForm &PresidentialPardonForm::operator =(const PresidentialPardonForm &copy)
 {
-	(void) copy;
+	_target = copy.getTarget();
 	return *this;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {
 	
-}
-
-int PresidentialPardonForm::getExecutionGrade() const
-{
-	return _exec_grade;
-}
-
-int PresidentialPardonForm::getSigningGrade() const
-{
-	return _sign_grade;
-}
-
-bool PresidentialPardonForm::getSigned() const
-{
-	return _signed;
-}
-
-void PresidentialPardonForm::beSigned(const Bureaucrat &signer)
-{
-	if (_signed)
-	{
-		std::cout << "PresidentialPardonForm already signed!\n";
-		return ;
-	}
-	if (signer.getGrade() > _sign_grade)
-		throw GradeTooLowException();
-	_signed = true;
-	std::cout << "PresidentialPardonForm signed!\n";
-}
-
-const char *PresidentialPardonForm::GradeTooHighException::what() const throw()
-{
-	return "Grade too high";
-}
-
-const char *PresidentialPardonForm::GradeTooLowException::what() const throw()
-{
-	return "Grade too low";
 }

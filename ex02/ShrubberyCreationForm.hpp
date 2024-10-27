@@ -3,48 +3,29 @@
 
 #include <iostream>
 #include <exception>
+#include <fstream>
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 typedef std::string str;
 
 class Bureaucrat;
 
-class ShrubberyCreationForm
+class ShrubberyCreationForm: public AForm
 {
 	private:
-		const str	_name;
-		const int	_sign_grade;
-		const int	_exec_grade;
-		bool		_signed;
+		str	_target;
 
 	public:
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(const str &name, int sign_grade, int exec_grade);
+		ShrubberyCreationForm(const str &target);
 		ShrubberyCreationForm(const ShrubberyCreationForm &copy);
 		~ShrubberyCreationForm();
 
-		str		getName			 () const;
-		int		getSigningGrade  () const;
-		int		getExecutionGrade() const;
-		bool	getSigned		 () const;
-		void	beSigned(const Bureaucrat &signer);
-		void	beExecuted(const Bureaucrat &executor);
-
+		str		getTarget()							  const;
+		void	execute  (const Bureaucrat &executor) const;
+		
 		ShrubberyCreationForm &operator =(const ShrubberyCreationForm &copy);
-
-		class GradeTooHighException: public std::exception
-		{
-			public:
-				const char	*what() const throw();
-		};
-		class GradeTooLowException: public std::exception
-		{
-			public:
-				const char	*what() const throw();
-
-		};
 };
-
-std::ostream	&operator <<(std::ostream &o, const ShrubberyCreationForm &a);
 
 #endif
